@@ -18,7 +18,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var bttnNavLeft: UIBarButtonItem!
 	@IBOutlet weak var bttnNavRight: UIBarButtonItem!
 	private lazy var allBttns = [bttnNavLeft, bttnNavRight, bttn1, bttn2, bttn3]
-	private let allNames = ["Лев", "Прав", "Кн.1", "Кн.2", "Кн.3"]
+	private let allNames = ["Лев", "Очист.", "Кн.1", "Кн.2", "Кн.3"]
 	
 	
 	override func viewDidLoad() {
@@ -44,11 +44,21 @@ class ViewController: UIViewController {
 	
 	
 	@IBAction func onBttn1Click(_ sender: UIButton) {
+		let keys = Cipher.generatePair_RSA(type: .accountKey)!
+		let pubKey = keys.publicDataKey
+		guard let stripped = ASN1DERDecoder.decode(data: pubKey) else { return }
 		
+		print(stripped)
+//		let str = stripped.base64EncodedString()
+//		textView.text = str
 	}
 	
+	
 	@IBAction func onBttn2Click(_ sender: UIButton) {
-		
+		let keys = Cipher.generatePair_RSA(type: .accountKey)!
+		let pubKey = keys.publicDataKey
+		let str = pubKey.base64EncodedString()
+		textView.text = str
 	}
 	
 	@IBAction func onBttn3Click(_ sender: UIButton) {
@@ -60,7 +70,7 @@ class ViewController: UIViewController {
 	}
 
 	@IBAction func onbttnNavRight(_ sender: Any) {
-		
+		textView.text = ""
 	}
 
 }
