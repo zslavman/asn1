@@ -10,11 +10,58 @@ import UIKit
 
 class ViewController: UIViewController {
 
+	@IBOutlet weak var textView: UITextView!
+	@IBOutlet weak var textLabel: UITextView!
+	@IBOutlet weak var bttn1: UIButton!
+	@IBOutlet weak var bttn2: UIButton!
+	@IBOutlet weak var bttn3: UIButton!
+	@IBOutlet weak var bttnNavLeft: UIBarButtonItem!
+	@IBOutlet weak var bttnNavRight: UIBarButtonItem!
+	private lazy var allBttns = [bttnNavLeft, bttnNavRight, bttn1, bttn2, bttn3]
+	private let allNames = ["Лев", "Прав", "Кн.1", "Кн.2", "Кн.3"]
+	
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		configure()
+	}
+	
+	
+	private func configure() {
+		navigationItem.title = "Test ANS1 data"
+		textView.layer.cornerRadius = 8
+		textLabel.layer.cornerRadius = 8
+		for (index, item) in allBttns.enumerated() {
+			if let bttn = item as? UIButton {
+				bttn.setTitle(allNames[index], for: .normal)
+				bttn.layer.cornerRadius = 6
+			}
+			else if let navBttn = item as? UIBarButtonItem {
+				navBttn.title = allNames[index]
+			}
+		}
+	}
+	
+	
+	@IBAction func onBttn1Click(_ sender: UIButton) {
+		
+	}
+	
+	@IBAction func onBttn2Click(_ sender: UIButton) {
+		
+	}
+	
+	@IBAction func onBttn3Click(_ sender: UIButton) {
+		
+	}
+	
+	@IBAction func onbttnNavLeft(_ sender: Any) {
+		
 	}
 
+	@IBAction func onbttnNavRight(_ sender: Any) {
+		
+	}
 
 }
 
