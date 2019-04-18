@@ -1,0 +1,16 @@
+PODS:
+  - SwCrypt (5.1.2)
+
+DEPENDENCIES:
+  - SwCrypt
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SwCrypt
+
+SPEC CHECKSUMS:
+  SwCrypt: b58f5d4c95d1c213d29f6a421856a3014213e088
+
+PODFILE CHECKSUM: 7aa5ae4c0fd3a7aaab7b212c830640c0adbc21c7
+
+COCOAPODS: 1.5.3
