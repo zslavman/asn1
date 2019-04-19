@@ -49,15 +49,17 @@ class ViewController: UIViewController {
 		let str = keyWithAddedHeader.base64EncodedString()
 		textView.text = str
 		textLabel.text = "\(keyWithAddedHeader)"
+		UIPasteboard.general.string = textView.text
 	}
 	
 	
 	@IBAction func onBttn2Click(_ sender: UIButton) {
 		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-		let keyWithAddedHeader = Cipher.addHeader(keys.privateDataKey)
+		let keyWithAddedHeader = Cipher.addHeader2(keys.privateDataKey)
 		let str = keyWithAddedHeader.base64EncodedString()
 		textView.text = str
 		textLabel.text = "\(keyWithAddedHeader)"
+		UIPasteboard.general.string = textView.text
 	}
 	
 	@IBAction func onBttn3Click(_ sender: UIButton) {

@@ -571,13 +571,18 @@ class Cipher {
 	}
 	
 	
+	// docs.microsoft.com/en-us/windows/desktop/seccertenroll/about-bit-string
+	// habr.com/ru/post/150888/
+	// en.wikipedia.org/wiki/X.690#Encoding
+	
 	public static func addHeader(_ derKey: Data) -> Data {
 		var result = Data()
 		let octetsArr: [UInt8] = encodedOctets(derKey.count + 1)
 		let encodingLength: Int = octetsArr.count
+		let isPrivateKey = (derKey.count > 512) ? true : false
 		
 		// Sequence of length 0xd made up of OID followed by NULL (RSA OID header)
-		// This is crypt algorithm identifier 1.2.840.113549.1.1.1 rsaEncryption (PKCS #1)
+		// This is crypt algorithm identifier: 1.2.840.113549.1.1.1 rsaEncryption (PKCS #1)
 		let OID: [UInt8] = [0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
 							0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00]
 		let privKeyHeaderVersion: [UInt8] = [0x02, 0x01, 0x00] // header "INTEGER 0"
@@ -586,7 +591,7 @@ class Cipher {
 		// ASN.1 SEQUENCE
 		builder.append(0x30)
 		
-		let versionCount = (derKey.count > 512) ? privKeyHeaderVersion.count : 0
+		let versionCount = (isPrivateKey) ? privKeyHeaderVersion.count : 0
 		
 		// Overall size, made of OID + bitstring encoding + actual key
 		let size = OID.count + 2 + encodingLength + derKey.count + versionCount
@@ -594,27 +599,66 @@ class Cipher {
 		builder.append(contentsOf: encodedSize)
 		result.append(builder, count: builder.count)
 		// for private keys only
-		if derKey.count > 512 {
+		if isPrivateKey {
 			result.append(privKeyHeaderVersion, count: privKeyHeaderVersion.count)
 		}
 		result.append(OID, count: OID.count)
 		builder.removeAll(keepingCapacity: false)
 		
+		// last part
 		builder.append(0x03) // 0x03 - BIT STRING, 0x04 - OCTET STRING
 		builder.append(contentsOf: encodedOctets(derKey.count + 1))
-		builder.append(0x00)
+		builder.append(0x00) // End-of-Content (EOC)
 		result.append(builder, count: builder.count)
 		
 		// Actual key bytes
-//		let convertedToOctets = [UInt8](derKey)
-//		result.append(octetsArr, count: convertedToOctets.count)
-		
 		result.append(derKey)
 		
 		return result
 	}
 	
 	
+	public static func addHeader2(_ derKey: Data) -> Data {
+		var result = Data()
+		let octetsArr: [UInt8] = encodedOctets(derKey.count + 1)
+		let encodingLength: Int = octetsArr.count
+		let isPrivateKey = (derKey.count > 512) ? true : false
+		
+		// Sequence of length 0xd made up of OID followed by NULL (RSA OID header)
+		// This is crypt algorithm identifier: 1.2.840.113549.1.1.1 rsaEncryption (PKCS #1)
+		let OID: [UInt8] = [0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
+							0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00]
+		let privKeyHeaderVersion: [UInt8] = [0x02, 0x01, 0x00] // header "INTEGER 0"
+		var builder: [UInt8] = []
+		
+		// ASN.1 SEQUENCE
+		builder.append(0x30)
+		
+		let versionCount = (isPrivateKey) ? privKeyHeaderVersion.count : 0
+		
+		// Overall size, made of OID + bitstring encoding + actual key
+		let size = OID.count + 2 + encodingLength + derKey.count + versionCount
+		let encodedSize = encodedOctets(size)
+		builder.append(contentsOf: encodedSize)
+		result.append(builder, count: builder.count)
+		// for private keys only
+		if isPrivateKey {
+			result.append(privKeyHeaderVersion, count: privKeyHeaderVersion.count)
+		}
+		result.append(OID, count: OID.count)
+		builder.removeAll(keepingCapacity: false)
+		
+		// last part
+		builder.append(0x04) // 0x03 - BIT STRING, 0x04 - OCTET STRING
+		builder.append(contentsOf: encodedOctets(derKey.count + 1))
+		builder.append(0x00)
+		result.append(builder, count: builder.count)
+		
+		// Actual key bytes
+		result.append(derKey)
+		
+		return result
+	}
 	
 	
 	
@@ -650,7 +694,7 @@ class Cipher {
 //	}
 	
 	
-	/// Helper function for ASN.1 encoding
+	/// calculate array of bits which will take "int"-size
 	private static func encodedOctets(_ int: Int) -> [UInt8] {
 		// Short form
 		if int < 128 {
@@ -668,6 +712,17 @@ class Cipher {
 		return result
 	}
 	
+	/// calculate array of bits which will take "int"-size
+	private static func octetStringSize(_ int: Int) -> [UInt8] {
+		let array = encodedOctets(int)
+		var toReturn = [UInt8]()
+		for item in array {
+			if item != 0x00 {
+				toReturn.append(item)
+			}
+		}
+		return toReturn
+	}
 	
 	
 }
