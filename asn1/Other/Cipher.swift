@@ -571,37 +571,52 @@ class Cipher {
 	}
 	
 	
-	
 	public static func addHeader(_ derKey: Data) -> Data {
 		var result = Data()
+		let octetsArr: [UInt8] = encodedOctets(derKey.count + 1)
+		let encodingLength: Int = octetsArr.count
 		
-		let encodingLength: Int = encodedOctets(derKey.count + 1).count
-		//Sequence of length 0xd made up of OID followed by NULL (RSA OID header)
+		// Sequence of length 0xd made up of OID followed by NULL (RSA OID header)
+		// This is crypt algorithm identifier 1.2.840.113549.1.1.1 rsaEncryption (PKCS #1)
 		let OID: [UInt8] = [0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
 							0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00]
+		let privKeyHeaderVersion: [UInt8] = [0x02, 0x01, 0x00] // header "INTEGER 0"
 		var builder: [UInt8] = []
 		
 		// ASN.1 SEQUENCE
 		builder.append(0x30)
 		
+		let versionCount = (derKey.count > 512) ? privKeyHeaderVersion.count : 0
+		
 		// Overall size, made of OID + bitstring encoding + actual key
-		let size = OID.count + 2 + encodingLength + derKey.count
+		let size = OID.count + 2 + encodingLength + derKey.count + versionCount
 		let encodedSize = encodedOctets(size)
 		builder.append(contentsOf: encodedSize)
 		result.append(builder, count: builder.count)
+		// for private keys only
+		if derKey.count > 512 {
+			result.append(privKeyHeaderVersion, count: privKeyHeaderVersion.count)
+		}
 		result.append(OID, count: OID.count)
 		builder.removeAll(keepingCapacity: false)
 		
-		builder.append(0x03)
+		builder.append(0x03) // 0x03 - BIT STRING, 0x04 - OCTET STRING
 		builder.append(contentsOf: encodedOctets(derKey.count + 1))
 		builder.append(0x00)
 		result.append(builder, count: builder.count)
 		
 		// Actual key bytes
+//		let convertedToOctets = [UInt8](derKey)
+//		result.append(octetsArr, count: convertedToOctets.count)
+		
 		result.append(derKey)
-
+		
 		return result
 	}
+	
+	
+	
+	
 	
 	
 //	public static func addHeader(_ derKey: Data) -> Data {

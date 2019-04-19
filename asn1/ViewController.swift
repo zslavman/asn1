@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwCrypt
 
 class ViewController: UIViewController {
 
@@ -45,27 +44,24 @@ class ViewController: UIViewController {
 	
 	
 	@IBAction func onBttn1Click(_ sender: UIButton) {
-		let (_, publicKey) = try! CC.RSA.generateKeyPair(2048)
-		let publicKeyPEM = SwKeyConvert.PublicKey.derToPKCS8PEM(publicKey)
-		textView.text = publicKeyPEM
+		let keys = Cipher.generatePair_RSA(type: .accountKey)!
+		let keyWithAddedHeader = Cipher.addHeader(keys.publicDataKey)
+		let str = keyWithAddedHeader.base64EncodedString()
+		textView.text = str
+		textLabel.text = "\(keyWithAddedHeader)"
 	}
 	
 	
 	@IBAction func onBttn2Click(_ sender: UIButton) {
-		let (privKey, _) = try! CC.RSA.generateKeyPair(2048)
-		let longed = Cipher.addHeader(privKey)
-//		let privKeyPEM = ASN1DERDecoder.decode(data: longed)
-		textView.text = "\(longed.base64EncodedString())"
+		let keys = Cipher.generatePair_RSA(type: .accountKey)!
+		let keyWithAddedHeader = Cipher.addHeader(keys.privateDataKey)
+		let str = keyWithAddedHeader.base64EncodedString()
+		textView.text = str
+		textLabel.text = "\(keyWithAddedHeader)"
 	}
 	
 	@IBAction func onBttn3Click(_ sender: UIButton) {
-//		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-//		let privKey = keys.privateDataKey
-		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-		let pubKey = keys.publicDataKey
-		let longed = Cipher.addHeader(pubKey)
-		textLabel.text = "\(longed)"
-		textView.text = longed.base64EncodedString()
+		
 	}
 	
 	@IBAction func onbttnNavLeft(_ sender: Any) {
@@ -76,6 +72,8 @@ class ViewController: UIViewController {
 		textView.text = ""
 		textLabel.text = ""
 	}
+	
+	
 
 }
 
