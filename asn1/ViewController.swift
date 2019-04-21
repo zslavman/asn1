@@ -45,7 +45,7 @@ class ViewController: UIViewController {
 	
 	@IBAction func onBttn1Click(_ sender: UIButton) {
 		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-		let keyWithAddedHeader = Cipher.addHeader(keys.publicDataKey)
+		let keyWithAddedHeader = Cipher.addHeaderForPrivateKey(keys.publicDataKey)
 		let str = keyWithAddedHeader.base64EncodedString()
 		textView.text = str
 		textLabel.text = "\(keyWithAddedHeader)"
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
 	
 	@IBAction func onBttn2Click(_ sender: UIButton) {
 		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-		let keyWithAddedHeader = Cipher.addHeader2(keys.privateDataKey)
+		let keyWithAddedHeader = Cipher.addHeaderForPrivateKey(keys.privateDataKey)
 		let str = keyWithAddedHeader.base64EncodedString()
 		textView.text = str
 		textLabel.text = "\(keyWithAddedHeader)"
@@ -63,11 +63,19 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func onBttn3Click(_ sender: UIButton) {
-		
+		let keys = Cipher.generatePair_RSA(type: .accountKey)!
+		let str = keys.privateDataKey.base64EncodedString()
+		textView.text = str
+		textLabel.text = "\(keys.privateDataKey)"
+		UIPasteboard.general.string = textView.text
 	}
 	
 	@IBAction func onbttnNavLeft(_ sender: Any) {
-		
+		guard let str = textView.text, str != "" else { return }
+		guard let number = Int(str) else { return }
+		textLabel.text = ""
+		let bytesArr = Cipher.splitToOctets(number)
+		bytesArr.forEach{textLabel.text += "\(String($0, radix: 16)) \n"}
 	}
 
 	@IBAction func onbttnNavRight(_ sender: Any) {

@@ -48,15 +48,15 @@ class Cipher {
 //		else {
 			let commonKeyAttr: [NSObject: Any] = [
 				kSecClass				: kSecClassKey,
-				kSecReturnRef			: true,
-				kSecReturnData			: false
+				kSecReturnRef			: false,
+				kSecReturnData			: true
 			]
 			let keyPairAttr: [NSObject: Any] = [
 				kSecAttrKeyType 		: kSecAttrKeyTypeRSA,
 				kSecAttrKeySizeInBits 	: 2048,
 				kSecPublicKeyAttrs		: commonKeyAttr,
 				kSecPrivateKeyAttrs		: commonKeyAttr,
-				kSecAttrCanDecrypt		: true
+//				kSecAttrCanDecrypt		: true,
 			]
 			var pubSecKey: SecKey?
 			var privSecKey: SecKey?
@@ -88,20 +88,17 @@ class Cipher {
 //			kSecAttrKeyType			: kSecAttrKeyTypeRSA,
 //			kSecAttrKeySizeInBits	: 2048,
 //			kSecPrivateKeyAttrs 	: [
-//				kSecAttrIsPermanent 	: true,
+//				kSecAttrIsPermanent 	: false,
 //				kSecAttrApplicationTag	: withTag.rawValue.data(using: String.Encoding.utf8)!
 //			]
 //		]
 //		var error: Unmanaged<CFError>?
 //		if let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) {
 //			// Gets the public key associated with the given private key.
-//			let publicKey = SecKeyCopyPublicKey(privateKey)!
+////			let publicKey = SecKeyCopyPublicKey(privateKey)!
 //			// save to keychain
-//			addSecKeyToKeychain(secKey: privateKey, access: .privateA, tagName: withTag)
-//			addSecKeyToKeychain(secKey: publicKey, access: .publicA, tagName: withTag)
-//			// printKeys()
-//			print("Keys successfully generated!")
-//			return getKeyData(withTag: .accountKey, access: .publicA)
+//			let privDataKey = convertSecKeyToData(secKey: privateKey)!
+//			return privDataKey
 //		}
 //		else {
 //			print(error!.takeRetainedValue() as Error)
@@ -618,48 +615,89 @@ class Cipher {
 	}
 	
 	
-	public static func addHeader2(_ derKey: Data) -> Data {
+	/// convert PKCS1 to PKCS8
+	public static func addHeaderForPrivateKey(_ derKey: Data) -> Data {
 		var result = Data()
-		let octetsArr: [UInt8] = encodedOctets(derKey.count + 1)
-		let encodingLength: Int = octetsArr.count
-		let isPrivateKey = (derKey.count > 512) ? true : false
-		
-		// Sequence of length 0xd made up of OID followed by NULL (RSA OID header)
-		// This is crypt algorithm identifier: 1.2.840.113549.1.1.1 rsaEncryption (PKCS #1)
-		let OID: [UInt8] = [0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
-							0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00]
-		let privKeyHeaderVersion: [UInt8] = [0x02, 0x01, 0x00] // header "INTEGER 0"
 		var builder: [UInt8] = []
-		
+		let privKeyHeaderVersion: [UInt8] = [0x02, 0x01, 0x00] // header "INTEGER 0"
+		// Crypt algorithm identifier: 1.2.840.113549.1.1.1 rsaEncryption (PKCS #1)
+		let OID: [UInt8] = [0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, //"SEQUENCE" + "OBJECT IDENTIFIER" + "NULL"
+							0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00]
 		// ASN.1 SEQUENCE
 		builder.append(0x30)
 		
-		let versionCount = (isPrivateKey) ? privKeyHeaderVersion.count : 0
-		
-		// Overall size, made of OID + bitstring encoding + actual key
-		let size = OID.count + 2 + encodingLength + derKey.count + versionCount
-		let encodedSize = encodedOctets(size)
-		builder.append(contentsOf: encodedSize)
+		// Overall size
+		let sequenceSize = privKeyHeaderVersion.count + OID.count + (4 + derKey.count)
+		let sequence = splitToOctets(sequenceSize)
+		builder.append(contentsOf: sequence)
 		result.append(builder, count: builder.count)
-		// for private keys only
-		if isPrivateKey {
-			result.append(privKeyHeaderVersion, count: privKeyHeaderVersion.count)
-		}
+
+		result.append(privKeyHeaderVersion, count: privKeyHeaderVersion.count)
 		result.append(OID, count: OID.count)
 		builder.removeAll(keepingCapacity: false)
 		
 		// last part
 		builder.append(0x04) // 0x03 - BIT STRING, 0x04 - OCTET STRING
-		builder.append(contentsOf: encodedOctets(derKey.count + 1))
-		builder.append(0x00)
+		builder.append(contentsOf: splitToOctets(derKey.count))
 		result.append(builder, count: builder.count)
 		
 		// Actual key bytes
 		result.append(derKey)
-		
+	
 		return result
 	}
 	
+	
+	
+	/// calculate array of bits which will take "int"-size
+	private static func encodedOctets(_ int: Int) -> [UInt8] {
+		// Short form
+		if int < 128 {
+			return [UInt8(int)]
+		}
+		// Long form
+		let i = (int / 256) + 1
+		var len = int
+		var firstBit = i + 0x80
+		if firstBit > 0x82 { // don't know why
+			firstBit = 0x82
+		}
+		var result: [UInt8] = [UInt8(firstBit)]
+		
+		for _ in 0..<i {
+			result.insert(UInt8(len & 0xFF), at: 1)
+			len = len >> 8
+		}
+		return result
+	}
+	
+	/* Some Examples:
+	* 128 = [0x81, 0x80]
+	* 129 = [0x81, 0x81]
+	* 255 = [0x81, 0xff]
+	* 256 = [0x82, 0x01]
+	* 257 = [0x82, 0x01, 0x01]
+	* 512 = [0x82, 0x02]
+	* 513 = [0x82, 0x02, 0x01]
+	* 768 = [0x82, 0x03]
+	* 769 = [0x82, 0x03, 0x01]
+	* 1024 = [0x82, 0x04
+	* 1025 = [0x82, 0x04, 0x01]
+	*/
+	
+	
+	
+	/// calculate array of bits which will take "int"-size
+	public static func splitToOctets(_ int: Int) -> [UInt8] {
+		let array = encodedOctets(int)
+		var toReturn = [UInt8]()
+		for item in array {
+			if item != 0x00 {
+				toReturn.append(item)
+			}
+		}
+		return toReturn
+	}
 	
 	
 	
@@ -692,38 +730,25 @@ class Cipher {
 //
 //		return result
 //	}
-	
-	
-	/// calculate array of bits which will take "int"-size
-	private static func encodedOctets(_ int: Int) -> [UInt8] {
-		// Short form
-		if int < 128 {
-			return [UInt8(int)]
-		}
-		// Long form
-		let i = (int / 256) + 1
-		var len = int
-		var result: [UInt8] = [UInt8(i + 0x80)]
-		
-		for _ in 0..<i {
-			result.insert(UInt8(len & 0xFF), at: 1)
-			len = len >> 8
-		}
-		return result
-	}
-	
-	/// calculate array of bits which will take "int"-size
-	private static func octetStringSize(_ int: Int) -> [UInt8] {
-		let array = encodedOctets(int)
-		var toReturn = [UInt8]()
-		for item in array {
-			if item != 0x00 {
-				toReturn.append(item)
-			}
-		}
-		return toReturn
-	}
-	
+//	
+//	
+//	/// calculate array of bits which will take "int"-size
+//	private static func encodedOctets(_ int: Int) -> [UInt8] {
+//		// Short form
+//		if int < 128 {
+//			return [UInt8(int)]
+//		}
+//		// Long form
+//		let i = (int / 256) + 1
+//		var len = int
+//		var result: [UInt8] = [UInt8(i + 0x80)]
+//		
+//		for _ in 0..<i {
+//			result.insert(UInt8(len & 0xFF), at: 1)
+//			len = len >> 8
+//		}
+//		return result
+//	}
 	
 }
 
