@@ -689,56 +689,7 @@ class Cipher {
 		return toReturn
 	}
 	
-	
-	
-//	public static func addHeader(_ derKey: Data) -> Data {
-//		var result = Data()
-//
-//		let encodingLength: Int = encodedOctets(derKey.count + 1).count
-//		let OID: [UInt8] = [0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
-//							0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00]
-//		var builder: [UInt8] = []
-//
-//		// ASN.1 SEQUENCE
-//		builder.append(0x30)
-//
-//		// Overall size, made of OID + bitstring encoding + actual key
-//		let size = OID.count + 2 + encodingLength + derKey.count
-//		let encodedSize = encodedOctets(size)
-//		builder.append(contentsOf: encodedSize)
-//		result.append(builder, count: builder.count)
-//		result.append(OID, count: OID.count)
-//		builder.removeAll(keepingCapacity: false)
-//
-//		builder.append(0x03)
-//		builder.append(contentsOf: encodedOctets(derKey.count + 1))
-//		builder.append(0x00)
-//		result.append(builder, count: builder.count)
-//
-//		// Actual key bytes
-//		result.append(derKey)
-//
-//		return result
-//	}
-//	
-//	
-//	/// calculate array of bits which will take "int"-size
-//	private static func encodedOctets(_ int: Int) -> [UInt8] {
-//		// Short form
-//		if int < 128 {
-//			return [UInt8(int)]
-//		}
-//		// Long form
-//		let i = (int / 256) + 1
-//		var len = int
-//		var result: [UInt8] = [UInt8(i + 0x80)]
-//		
-//		for _ in 0..<i {
-//			result.insert(UInt8(len & 0xFF), at: 1)
-//			len = len >> 8
-//		}
-//		return result
-//	}
+
 	
 }
 
