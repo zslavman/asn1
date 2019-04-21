@@ -45,30 +45,33 @@ class ViewController: UIViewController {
 	
 	@IBAction func onBttn1Click(_ sender: UIButton) {
 		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-		let keyWithAddedHeader = Cipher.addHeaderForPrivateKey(keys.publicDataKey)
-		let str = keyWithAddedHeader.base64EncodedString()
+		let str = keys.publicDataKey.base64EncodedString()
 		textView.text = str
-		textLabel.text = "\(keyWithAddedHeader)"
+		textLabel.text = "\(keys.privateDataKey)"
 		UIPasteboard.general.string = textView.text
 	}
 	
 	
 	@IBAction func onBttn2Click(_ sender: UIButton) {
 		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-		let keyWithAddedHeader = Cipher.addHeaderForPrivateKey(keys.privateDataKey)
+		let keyWithAddedHeader = Cipher.addHeaderForPubKey(keys.publicDataKey)
 		let str = keyWithAddedHeader.base64EncodedString()
 		textView.text = str
 		textLabel.text = "\(keyWithAddedHeader)"
 		UIPasteboard.general.string = textView.text
 	}
 	
+	
 	@IBAction func onBttn3Click(_ sender: UIButton) {
 		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-		let str = keys.privateDataKey.base64EncodedString()
+		let keyWithAddedHeader = Cipher.addHeaderForPrivKey(keys.privateDataKey)
+		let str = keyWithAddedHeader.base64EncodedString()
 		textView.text = str
-		textLabel.text = "\(keys.privateDataKey)"
+		textLabel.text = "\(keyWithAddedHeader)"
 		UIPasteboard.general.string = textView.text
 	}
+	
+
 	
 	@IBAction func onbttnNavLeft(_ sender: Any) {
 		guard let str = textView.text, str != "" else { return }

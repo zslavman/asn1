@@ -89,9 +89,9 @@
 		569DE6E62267BECF004F6B5B /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				569DE6E02267BEA6004F6B5B /* SimpleScanner.swift */,
 				569DE6E22267BEC5004F6B5B /* Cipher.swift */,
 				569DE6E32267BEC5004F6B5B /* KeyChain.swift */,
+				569DE6E02267BEA6004F6B5B /* SimpleScanner.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";

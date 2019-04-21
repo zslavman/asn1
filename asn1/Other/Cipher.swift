@@ -56,7 +56,6 @@ class Cipher {
 				kSecAttrKeySizeInBits 	: 2048,
 				kSecPublicKeyAttrs		: commonKeyAttr,
 				kSecPrivateKeyAttrs		: commonKeyAttr,
-//				kSecAttrCanDecrypt		: true,
 			]
 			var pubSecKey: SecKey?
 			var privSecKey: SecKey?
@@ -537,8 +536,7 @@ class Cipher {
 	/*----------------------------------------------------------------------*/
 	
 	
-	public static func addX509CertificateHeader(for keyData: Data) -> Data {
-		
+	private static func addX509CertificateHeader(for keyData: Data) -> Data {
 		if keyData.count == 140 {
 			return Data([0x30, 0x81, 0x9F,
 						 0x30, 0x0D,
@@ -572,38 +570,29 @@ class Cipher {
 	// habr.com/ru/post/150888/
 	// en.wikipedia.org/wiki/X.690#Encoding
 	
-	public static func addHeader(_ derKey: Data) -> Data {
+	public static func addHeaderForPubKey(_ derKey: Data) -> Data {
 		var result = Data()
+		var builder: [UInt8] = []
 		let octetsArr: [UInt8] = encodedOctets(derKey.count + 1)
 		let encodingLength: Int = octetsArr.count
-		let isPrivateKey = (derKey.count > 512) ? true : false
 		
 		// Sequence of length 0xd made up of OID followed by NULL (RSA OID header)
-		// This is crypt algorithm identifier: 1.2.840.113549.1.1.1 rsaEncryption (PKCS #1)
 		let OID: [UInt8] = [0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
 							0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00]
-		let privKeyHeaderVersion: [UInt8] = [0x02, 0x01, 0x00] // header "INTEGER 0"
-		var builder: [UInt8] = []
-		
 		// ASN.1 SEQUENCE
 		builder.append(0x30)
 		
-		let versionCount = (isPrivateKey) ? privKeyHeaderVersion.count : 0
-		
 		// Overall size, made of OID + bitstring encoding + actual key
-		let size = OID.count + 2 + encodingLength + derKey.count + versionCount
+		let size = OID.count + 2 + encodingLength + derKey.count
 		let encodedSize = encodedOctets(size)
 		builder.append(contentsOf: encodedSize)
 		result.append(builder, count: builder.count)
-		// for private keys only
-		if isPrivateKey {
-			result.append(privKeyHeaderVersion, count: privKeyHeaderVersion.count)
-		}
+
 		result.append(OID, count: OID.count)
 		builder.removeAll(keepingCapacity: false)
 		
 		// last part
-		builder.append(0x03) // 0x03 - BIT STRING, 0x04 - OCTET STRING
+		builder.append(0x03)
 		builder.append(contentsOf: encodedOctets(derKey.count + 1))
 		builder.append(0x00) // End-of-Content (EOC)
 		result.append(builder, count: builder.count)
@@ -616,7 +605,7 @@ class Cipher {
 	
 	
 	/// convert PKCS1 to PKCS8
-	public static func addHeaderForPrivateKey(_ derKey: Data) -> Data {
+	public static func addHeaderForPrivKey(_ derKey: Data) -> Data {
 		var result = Data()
 		var builder: [UInt8] = []
 		let privKeyHeaderVersion: [UInt8] = [0x02, 0x01, 0x00] // header "INTEGER 0"
@@ -626,8 +615,10 @@ class Cipher {
 		// ASN.1 SEQUENCE
 		builder.append(0x30)
 		
+		let countsOfAddedHeaders = 1 + 1 + 1 + 1 // first bit for 4 headers
+		
 		// Overall size
-		let sequenceSize = privKeyHeaderVersion.count + OID.count + (4 + derKey.count)
+		let sequenceSize = privKeyHeaderVersion.count + OID.count + derKey.count + countsOfAddedHeaders
 		let sequence = splitToOctets(sequenceSize)
 		builder.append(contentsOf: sequence)
 		result.append(builder, count: builder.count)
@@ -649,7 +640,7 @@ class Cipher {
 	
 	
 	
-	/// calculate array of bits which will take "int"-size
+	/// calculate array of bits which will take "int"-size (for BIT STRING)
 	private static func encodedOctets(_ int: Int) -> [UInt8] {
 		// Short form
 		if int < 128 {
@@ -671,6 +662,9 @@ class Cipher {
 		return result
 	}
 	
+	
+	
+	/// calculate array of bits which will take "int"-size (for OCTET STRING)
 	/* Some Examples:
 	* 128 = [0x81, 0x80]
 	* 129 = [0x81, 0x81]
@@ -684,10 +678,6 @@ class Cipher {
 	* 1024 = [0x82, 0x04
 	* 1025 = [0x82, 0x04, 0x01]
 	*/
-	
-	
-	
-	/// calculate array of bits which will take "int"-size
 	public static func splitToOctets(_ int: Int) -> [UInt8] {
 		let array = encodedOctets(int)
 		var toReturn = [UInt8]()
