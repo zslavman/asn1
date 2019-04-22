@@ -65,7 +65,15 @@ class ViewController: UIViewController {
 	@IBAction func onBttn3Click(_ sender: UIButton) {
 		let keys = Cipher.generatePair_RSA(type: .accountKey)!
 		let keyWithAddedHeader = Cipher.addHeaderForPrivKey(keys.privateDataKey)
-		let str = keyWithAddedHeader.base64EncodedString()
+		
+//		let str = keyWithAddedHeader.base64EncodedString()
+//		textView.text = str
+//		textLabel.text = "\(keyWithAddedHeader)"
+//		UIPasteboard.general.string = textView.text
+		// ------
+		
+		guard let cutedKey = Cipher.stripPrivateKeyHeader(keyWithAddedHeader) else { return }
+		let str = cutedKey.base64EncodedString()
 		textView.text = str
 		textLabel.text = "\(keyWithAddedHeader)"
 		UIPasteboard.general.string = textView.text

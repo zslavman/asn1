@@ -604,7 +604,7 @@ class Cipher {
 	}
 	
 	
-	/// convert PKCS1 to PKCS8
+	/// convert PKCS1 to PKCS8 (but don't see on crypt algorithm identifier)
 	public static func addHeaderForPrivKey(_ derKey: Data) -> Data {
 		var result = Data()
 		var builder: [UInt8] = []
