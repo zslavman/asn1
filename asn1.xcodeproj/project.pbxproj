@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5670E5CA226E5924006C868F /* SUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670E5C9226E5924006C868F /* SUtils.swift */; };
+		56846180226E63E100E6121E /* ProximityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5684617F226E63E100E6121E /* ProximityService.swift */; };
 		569DE6CF2267AF40004F6B5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569DE6CE2267AF40004F6B5B /* AppDelegate.swift */; };
 		569DE6D12267AF40004F6B5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569DE6D02267AF40004F6B5B /* ViewController.swift */; };
 		569DE6D42267AF40004F6B5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 569DE6D22267AF40004F6B5B /* Main.storyboard */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		14E1F0571BB2E8DC1F8CA7FE /* Pods-asn1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-asn1.release.xcconfig"; path = "Pods/Target Support Files/Pods-asn1/Pods-asn1.release.xcconfig"; sourceTree = "<group>"; };
+		5670E5C9226E5924006C868F /* SUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUtils.swift; sourceTree = "<group>"; };
+		5684617F226E63E100E6121E /* ProximityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityService.swift; sourceTree = "<group>"; };
 		569DE6CB2267AF40004F6B5B /* asn1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = asn1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		569DE6CE2267AF40004F6B5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		569DE6D02267AF40004F6B5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				569DE6E22267BEC5004F6B5B /* Cipher.swift */,
+				5684617F226E63E100E6121E /* ProximityService.swift */,
+				5670E5C9226E5924006C868F /* SUtils.swift */,
 				569DE6E32267BEC5004F6B5B /* KeyChain.swift */,
 				569DE6E02267BEA6004F6B5B /* SimpleScanner.swift */,
 			);
@@ -226,6 +232,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				569DE6D12267AF40004F6B5B /* ViewController.swift in Sources */,
+				5670E5CA226E5924006C868F /* SUtils.swift in Sources */,
+				56846180226E63E100E6121E /* ProximityService.swift in Sources */,
 				569DE6E12267BEA6004F6B5B /* SimpleScanner.swift in Sources */,
 				569DE6E52267BEC5004F6B5B /* KeyChain.swift in Sources */,
 				569DE6E42267BEC5004F6B5B /* Cipher.swift in Sources */,
