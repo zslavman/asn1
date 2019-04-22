@@ -30,7 +30,7 @@ struct KeyPairRSA {
 
 class Cipher {
 	
-	private static let cryptoSecKeyAlgorithm = SecKeyAlgorithm.rsaEncryptionOAEPSHA1 // works lower then 224 bytes only
+	private static let cryptoSecKeyAlgorithm = SecKeyAlgorithm.rsaEncryptionOAEPSHA1AESGCM // works lower then 224 bytes only
 	public static let suiteName = "group.com.teamyIntermodules"
 	
 	//MARK:- RSA Key-pair Generation method
@@ -152,6 +152,7 @@ class Cipher {
 		}
 		guard let privSecKey = convertKeyDataToSecKey(key: privDataKey, isPublic: false) else { return nil }
 		var error: Unmanaged<CFError>?
+		// SecKeyDecrypt
 		guard let decryptData = SecKeyCreateDecryptedData(privSecKey,
 														  cryptoSecKeyAlgorithm,
 														  data as CFData,
@@ -536,7 +537,7 @@ class Cipher {
 	/*----------------------------------------------------------------------*/
 	
 	
-	private static func addX509CertificateHeader(for keyData: Data) -> Data {
+	public static func addX509CertificateHeader(for keyData: Data) -> Data {
 		if keyData.count == 140 {
 			return Data([0x30, 0x81, 0x9F,
 						 0x30, 0x0D,
@@ -602,6 +603,39 @@ class Cipher {
 		
 		return result
 	}
+	
+	
+	public static func addHeaderForPubKey777(_ derKey: Data) -> Data {
+		var result = Data()
+		var builder: [UInt8] = []
+
+		// Crypt algorithm identifier: 1.2.840.113549.1.1.1 rsaEncryption (PKCS #1)
+		let OID: [UInt8] = [0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, //"SEQUENCE" + "OBJECT IDENTIFIER" + "NULL"
+			0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00]
+		// ASN.1 SEQUENCE
+		builder.append(0x30)
+		
+		let countsOfAddedHeaders = 4
+		
+		// Overall size
+		let sequenceSize = OID.count + derKey.count + countsOfAddedHeaders
+		let sequence = splitToOctets(sequenceSize)
+		builder.append(contentsOf: sequence)
+		result.append(builder, count: builder.count)
+
+		result.append(OID, count: OID.count)
+		builder.removeAll(keepingCapacity: false)
+		
+		builder.append(0x04) // OCTET STRING
+		builder.append(contentsOf: splitToOctets(derKey.count))
+		result.append(builder, count: builder.count)
+		
+		// Actual key bytes
+		result.append(derKey)
+		
+		return result
+	}
+	
 	
 	
 	/// convert PKCS1 to PKCS8 (but don't see on crypt algorithm identifier)

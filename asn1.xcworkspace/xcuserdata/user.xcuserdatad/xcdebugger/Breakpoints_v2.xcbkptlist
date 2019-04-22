@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "asn1/Other/Cipher.swift"
-            timestampString = "577610768.189252"
+            timestampString = "577641299.425709"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
-            landmarkName = "stripPublicKeyHeader(_:)"
+            startingLineNumber = "541"
+            endingLineNumber = "541"
+            landmarkName = "addX509CertificateHeader(for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

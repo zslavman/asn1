@@ -19,11 +19,12 @@ class ViewController: UIViewController {
 	@IBOutlet weak var bttnNavRight: UIBarButtonItem!
 	private lazy var allBttns = [bttnNavLeft, bttnNavRight, bttn1, bttn2, bttn3]
 	private let allNames = ["Лев", "Очист.", "Кн.1", "Кн.2", "Кн.3"]
-	
+	let temp = "ijhsdjahfgkjhskjfhjkshjkhsdkjfhkjsdhfjlhsljhflsjkhjljskhfjdshfjshfjkshfjkhsf jhs jfhsjfh jsh fjhflkwe fngerkljgjn ianhti erpkrol ijhsdjahfgk jhskjfhjkshjkhsdkjfhkj sdhfjlhsljhflsjkhjljskhfjdshfjshfjkshfjkhsf jhs jfhsjfh jsh fjhjg kjoghj,cbk ixfjkjdfnrj gfr" // 256 bytes
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		configure()
+		textView.text = temp
 	}
 	
 	
@@ -44,10 +45,13 @@ class ViewController: UIViewController {
 	
 	
 	@IBAction func onBttn1Click(_ sender: UIButton) {
+		guard let str = textView.text, str != "" else { return }
+		let data = str.data(using: .utf8)!
 		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-		let str = keys.publicDataKey.base64EncodedString()
-		textView.text = str
-		textLabel.text = "\(keys.privateDataKey)"
+		if let decrypted = Cipher.encrypt_RSA(data: data, rsaPublicKeyData: keys.publicDataKey) {
+			textLabel.text = "\(decrypted)"
+			textView.text = decrypted.base64EncodedString()
+		}
 		UIPasteboard.general.string = textView.text
 	}
 	
@@ -61,19 +65,11 @@ class ViewController: UIViewController {
 		UIPasteboard.general.string = textView.text
 	}
 	
-	
+
 	@IBAction func onBttn3Click(_ sender: UIButton) {
 		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-		let keyWithAddedHeader = Cipher.addHeaderForPrivKey(keys.privateDataKey)
-		
-//		let str = keyWithAddedHeader.base64EncodedString()
-//		textView.text = str
-//		textLabel.text = "\(keyWithAddedHeader)"
-//		UIPasteboard.general.string = textView.text
-		// ------
-		
-		guard let cutedKey = Cipher.stripPrivateKeyHeader(keyWithAddedHeader) else { return }
-		let str = cutedKey.base64EncodedString()
+		let keyWithAddedHeader = Cipher.addHeaderForPubKey777(keys.publicDataKey)
+		let str = keyWithAddedHeader.base64EncodedString()
 		textView.text = str
 		textLabel.text = "\(keyWithAddedHeader)"
 		UIPasteboard.general.string = textView.text
