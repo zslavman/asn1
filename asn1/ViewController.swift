@@ -46,14 +46,8 @@ class ViewController: UIViewController {
 	
 	
 	@IBAction func onBttn1Click(_ sender: UIButton) {
-		guard let str = textView.text, str != "" else { return }
-		let data = str.data(using: .utf8)!
-		let keys = Cipher.generatePair_RSA(type: .accountKey)!
-		if let decrypted = Cipher.encrypt_RSA(data: data, rsaPublicKeyData: keys.publicDataKey) {
-			textLabel.text = "\(decrypted)"
-			textView.text = decrypted.base64EncodedString()
-		}
-		UIPasteboard.general.string = textView.text
+		let sliderVC = SliderVC()
+		navigationController?.pushViewController(sliderVC, animated: true)
 	}
 	
 	
