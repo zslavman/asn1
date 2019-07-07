@@ -24,7 +24,6 @@ class SliderVC: UIViewController {
 		customSlider.addTarget(self, action: #selector(onSliderChange), for: .valueChanged)
 		try? AVAudioSession.sharedInstance().setActive(true)
 		AVAudioSession.sharedInstance().addObserver(self, forKeyPath: "outputVolume", options: [.new], context: nil)
-
     }
 	
 
@@ -61,7 +60,7 @@ class SliderVC: UIViewController {
 	
 	deinit {
 		try? AVAudioSession.sharedInstance().setActive(false)
-		NotificationCenter.default.removeObserver(self)
+		AVAudioSession.sharedInstance().removeObserver(self, forKeyPath: "outputVolume")
 	}
 
 }

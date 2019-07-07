@@ -10,12 +10,8 @@ import UIKit
 
 class InfoSlider: UISlider {
 	
-	public let infoLable: UILabel = {
-		let label = UILabel()
-		label.backgroundColor = .red
-		label.text = "100"
-		label.textAlignment = .center
-		//label.translatesAutoresizingMaskIntoConstraints = false
+	public let infoLable: LabelForSlider = {
+		let label = LabelForSlider()
 		label.alpha = 0
 		return label
 	}()
@@ -90,9 +86,70 @@ class InfoSlider: UISlider {
 
 	private func positionAndUpdatePopupView() {
 		let _thumbRect = getCurrentThumbRect()
-		let popupRect = _thumbRect.offsetBy(dx: 0, dy: -_thumbRect.size.height * 1.5)
-		infoLable.frame = popupRect.insetBy(dx: -20, dy: -10)
-		infoLable.text = String(Int(value * 100))
+		let popupRect = _thumbRect.offsetBy(dx: 0, dy: -_thumbRect.size.height * 1.5) // translate label
+		infoLable.frame = popupRect.insetBy(dx: -10, dy: -5) // insert blank space (minus - increase space) in both directions
+		infoLable.setValue(value)
+	}
+	
+}
+
+
+
+class LabelForSlider: UIView {
+	
+	private var str: String = "25"
+	private let font = UIFont.systemFont(ofSize: 18)
+	
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		backgroundColor = .clear
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
+	override func draw(_ rect: CGRect) {
+		// Set the fill color
+		UIColor.black.withAlphaComponent(0.08).setFill()
+		
+		// Create the path for the rounded rectangle
+		let roundedRect = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.size.width, height: bounds.size.height * 0.8)
+		let roundedRectPath = UIBezierPath(roundedRect: roundedRect, cornerRadius: 6.0)
+		
+		// Create the arrow path
+		let arrowPath = UIBezierPath()
+		let midX = bounds.midX
+		let p0 = CGPoint(x: midX, y: bounds.maxY)
+		arrowPath.move(to: p0)
+		arrowPath.addLine(to: CGPoint(x: midX - 10.0, y: roundedRect.maxY))
+		arrowPath.addLine(to: CGPoint(x: midX + 10.0, y: roundedRect.maxY))
+		arrowPath.close()
+		
+		// Attach the arrow path to the rounded rect
+		roundedRectPath.append(arrowPath)
+		
+		roundedRectPath.fill()
+		
+		let style = NSMutableParagraphStyle()
+		style.alignment = NSTextAlignment.center
+		
+		// Draw the text
+		UIColor(white: 1, alpha: 0.8).set()
+		let siz = str.size(withAttributes: [.font: font])
+		let yOffset: CGFloat = (roundedRect.size.height - siz.height) / 2
+		let textRect = CGRect(x: roundedRect.origin.x, y: yOffset, width: roundedRect.size.width, height: siz.height)
+		str.draw(in: textRect, withAttributes: [
+			.font			: font,
+			.foregroundColor: UIColor.black,
+			.paragraphStyle : style,
+		])
+	}
+	
+	
+	public func setValue(_ val: Float) {
+		str = String(Int(val * 100))
+		setNeedsDisplay()
 	}
 	
 }
