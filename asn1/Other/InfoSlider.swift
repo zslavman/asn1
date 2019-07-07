@@ -52,7 +52,7 @@ class InfoSlider: UISlider {
 		//print(centerPoint)
 		infoLable.text = String(Int(value * 100))
 		infoLable.center = centerPoint
-		print(infoLable.frame.origin.x)
+		print("centerPoint = ", centerPoint)
 		
 		return sliderFrame
 	}
