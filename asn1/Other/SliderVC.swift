@@ -15,8 +15,6 @@ class SliderVC: UIViewController {
 		let slid = InfoSlider()
 		return slid
 	}()
-	private let kvoSoundVolumeKey1 = "AVSystemController_SystemVolumeDidChangeNotification"
-	private let kvoSoundVolumeKey2 = "AVSystemController_AudioVolumeChangeReasonNotificationParameter"
 
 	
     override func viewDidLoad() {
@@ -26,8 +24,7 @@ class SliderVC: UIViewController {
 		customSlider.addTarget(self, action: #selector(onSliderChange), for: .valueChanged)
 		try? AVAudioSession.sharedInstance().setActive(true)
 		AVAudioSession.sharedInstance().addObserver(self, forKeyPath: "outputVolume", options: [.new], context: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(volumeChanged(notif:)),
-											   name: NSNotification.Name(rawValue: kvoSoundVolumeKey1), object: nil)
+
     }
 	
 
@@ -51,32 +48,20 @@ class SliderVC: UIViewController {
 		//print("valueChanged = \(sender.value)")
 	}
 	
-	
-	/// volume buttons handlerd (limit is reached)
-	@objc private func volumeChanged(notif: Notification) {
-		print(11111)
-		guard let userInfo = notif.userInfo else { return }
-		guard let volumeChangeType = userInfo[kvoSoundVolumeKey2] as? String else { return }
-		guard volumeChangeType == "ExplicitVolumeChange" else { return }
-		let curSysVolume = AVAudioSession.sharedInstance().outputVolume
 
-		customSlider.setValue(curSysVolume, animated: true)
-	}
-	
-	
-	/// volume buttons handlerd (limit not reached)
+	/// volume buttons handlerd (if limits not reached)
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 		guard let key = keyPath, let change = change else { return }
 		if key == "outputVolume" {
 			let newValue = change[.newKey] as! NSNumber
-			customSlider.setValue(newValue.floatValue, animated: true)
+			customSlider.setValue(newValue.floatValue, animated: false)
 		}
 	}
 	
 	
 	deinit {
-//		try? AVAudioSession.sharedInstance().setActive(false)
-//		NotificationCenter.default.removeObserver(self)
+		try? AVAudioSession.sharedInstance().setActive(false)
+		NotificationCenter.default.removeObserver(self)
 	}
 
 }
