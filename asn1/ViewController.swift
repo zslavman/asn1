@@ -46,8 +46,9 @@ class ViewController: UIViewController {
 	
 	
 	@IBAction func onBttn1Click(_ sender: UIButton) {
-		let sliderVC = SliderVC()
-		navigationController?.pushViewController(sliderVC, animated: true)
+		//let sliderVC = SliderVC()
+		let lounchVC = LaunchViewController()
+		navigationController?.pushViewController(lounchVC, animated: true)
 	}
 	
 	

@@ -20,6 +20,28 @@
 		569DE6E42267BEC5004F6B5B /* Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569DE6E22267BEC5004F6B5B /* Cipher.swift */; };
 		569DE6E52267BEC5004F6B5B /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569DE6E32267BEC5004F6B5B /* KeyChain.swift */; };
 		6E713C97D13647E045825653 /* Pods_asn1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52C48C54C0042379A9FB94F /* Pods_asn1.framework */; };
+		CE14AC5722D38F490054E60B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC5622D38F490054E60B /* ChatViewController.swift */; };
+		CE14AC5B22D38FC20054E60B /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC5822D38FC20054E60B /* MockMessage.swift */; };
+		CE14AC5C22D38FC20054E60B /* MockUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC5922D38FC20054E60B /* MockUser.swift */; };
+		CE14AC5D22D38FC20054E60B /* MockSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC5A22D38FC20054E60B /* MockSocket.swift */; };
+		CE14AC5F22D38FFC0054E60B /* BasicAudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC5E22D38FFC0054E60B /* BasicAudioController.swift */; };
+		CE14AC6122D390380054E60B /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC6022D390380054E60B /* SampleData.swift */; };
+		CE14AC6322D390430054E60B /* Lorem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC6222D390430054E60B /* Lorem.swift */; };
+		CE14AC6622D390CE0054E60B /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC6422D390CE0054E60B /* UIViewController+Extensions.swift */; };
+		CE14AC6722D390CE0054E60B /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC6522D390CE0054E60B /* UIColor+Extensions.swift */; };
+		CE14AC6922D391250054E60B /* Settings+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC6822D391250054E60B /* Settings+UserDefaults.swift */; };
+		CE14AC6C22D393E70054E60B /* sound1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CE14AC6A22D393E70054E60B /* sound1.m4a */; };
+		CE14AC6D22D393E70054E60B /* sound2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CE14AC6B22D393E70054E60B /* sound2.m4a */; };
+		CE14AC7022D395580054E60B /* AutocompleteExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC6E22D395580054E60B /* AutocompleteExampleViewController.swift */; };
+		CE14AC7122D395580054E60B /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC6F22D395580054E60B /* LaunchViewController.swift */; };
+		CE14AC7C22D3975A0054E60B /* BasicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC7722D3975A0054E60B /* BasicExampleViewController.swift */; };
+		CE14AC7D22D3975A0054E60B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC7822D3975A0054E60B /* NavigationController.swift */; };
+		CE14AC7E22D3975A0054E60B /* AdvancedExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC7922D3975A0054E60B /* AdvancedExampleViewController.swift */; };
+		CE14AC7F22D3975A0054E60B /* MessageContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC7A22D3975A0054E60B /* MessageContainerController.swift */; };
+		CE14AC8022D3975A0054E60B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC7B22D3975A0054E60B /* SettingsViewController.swift */; };
+		CE14AC8322D398170054E60B /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC8122D398170054E60B /* TableViewCells.swift */; };
+		CE14AC8422D398170054E60B /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC8222D398170054E60B /* CustomCell.swift */; };
+		CE14AC8722D398DB0054E60B /* CustomMessageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC8622D398DB0054E60B /* CustomMessageFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +62,28 @@
 		569DE6E32267BEC5004F6B5B /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		98F874FE6B0D99E44DFA4447 /* Pods-asn1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-asn1.debug.xcconfig"; path = "Pods/Target Support Files/Pods-asn1/Pods-asn1.debug.xcconfig"; sourceTree = "<group>"; };
 		A52C48C54C0042379A9FB94F /* Pods_asn1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_asn1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE14AC5622D38F490054E60B /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		CE14AC5822D38FC20054E60B /* MockMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
+		CE14AC5922D38FC20054E60B /* MockUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockUser.swift; sourceTree = "<group>"; };
+		CE14AC5A22D38FC20054E60B /* MockSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSocket.swift; sourceTree = "<group>"; };
+		CE14AC5E22D38FFC0054E60B /* BasicAudioController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAudioController.swift; sourceTree = "<group>"; };
+		CE14AC6022D390380054E60B /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		CE14AC6222D390430054E60B /* Lorem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lorem.swift; sourceTree = "<group>"; };
+		CE14AC6422D390CE0054E60B /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		CE14AC6522D390CE0054E60B /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		CE14AC6822D391250054E60B /* Settings+UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+UserDefaults.swift"; sourceTree = "<group>"; };
+		CE14AC6A22D393E70054E60B /* sound1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound1.m4a; sourceTree = "<group>"; };
+		CE14AC6B22D393E70054E60B /* sound2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound2.m4a; sourceTree = "<group>"; };
+		CE14AC6E22D395580054E60B /* AutocompleteExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteExampleViewController.swift; sourceTree = "<group>"; };
+		CE14AC6F22D395580054E60B /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		CE14AC7722D3975A0054E60B /* BasicExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicExampleViewController.swift; sourceTree = "<group>"; };
+		CE14AC7822D3975A0054E60B /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		CE14AC7922D3975A0054E60B /* AdvancedExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedExampleViewController.swift; sourceTree = "<group>"; };
+		CE14AC7A22D3975A0054E60B /* MessageContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContainerController.swift; sourceTree = "<group>"; };
+		CE14AC7B22D3975A0054E60B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		CE14AC8122D398170054E60B /* TableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
+		CE14AC8222D398170054E60B /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		CE14AC8622D398DB0054E60B /* CustomMessageFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessageFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +130,7 @@
 				569DE6CE2267AF40004F6B5B /* AppDelegate.swift */,
 				569DE6D02267AF40004F6B5B /* ViewController.swift */,
 				569DE6E62267BECF004F6B5B /* Other */,
+				CE14AC5522D38C810054E60B /* for MessageKit */,
 				569DE6D22267AF40004F6B5B /* Main.storyboard */,
 				569DE6D52267AF41004F6B5B /* Assets.xcassets */,
 				569DE6D72267AF41004F6B5B /* LaunchScreen.storyboard */,
@@ -106,6 +151,83 @@
 				569DE6E02267BEA6004F6B5B /* SimpleScanner.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		CE14AC5522D38C810054E60B /* for MessageKit */ = {
+			isa = PBXGroup;
+			children = (
+				CE14AC7222D396520054E60B /* ViewControllers */,
+				CE14AC8522D3981F0054E60B /* Views */,
+				CE14AC7422D396910054E60B /* Models */,
+				CE14AC7322D396680054E60B /* Sounds */,
+				CE14AC7522D396BB0054E60B /* Data Generation */,
+				CE14AC7622D396E20054E60B /* miscellaneous */,
+			);
+			path = "for MessageKit";
+			sourceTree = "<group>";
+		};
+		CE14AC7222D396520054E60B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE14AC6F22D395580054E60B /* LaunchViewController.swift */,
+				CE14AC6E22D395580054E60B /* AutocompleteExampleViewController.swift */,
+				CE14AC7922D3975A0054E60B /* AdvancedExampleViewController.swift */,
+				CE14AC7722D3975A0054E60B /* BasicExampleViewController.swift */,
+				CE14AC7A22D3975A0054E60B /* MessageContainerController.swift */,
+				CE14AC7822D3975A0054E60B /* NavigationController.swift */,
+				CE14AC7B22D3975A0054E60B /* SettingsViewController.swift */,
+				CE14AC5622D38F490054E60B /* ChatViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CE14AC7322D396680054E60B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				CE14AC6A22D393E70054E60B /* sound1.m4a */,
+				CE14AC6B22D393E70054E60B /* sound2.m4a */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		CE14AC7422D396910054E60B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE14AC5822D38FC20054E60B /* MockMessage.swift */,
+				CE14AC5A22D38FC20054E60B /* MockSocket.swift */,
+				CE14AC5922D38FC20054E60B /* MockUser.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CE14AC7522D396BB0054E60B /* Data Generation */ = {
+			isa = PBXGroup;
+			children = (
+				CE14AC6222D390430054E60B /* Lorem.swift */,
+				CE14AC6022D390380054E60B /* SampleData.swift */,
+			);
+			path = "Data Generation";
+			sourceTree = "<group>";
+		};
+		CE14AC7622D396E20054E60B /* miscellaneous */ = {
+			isa = PBXGroup;
+			children = (
+				CE14AC8622D398DB0054E60B /* CustomMessageFlowLayout.swift */,
+				CE14AC6822D391250054E60B /* Settings+UserDefaults.swift */,
+				CE14AC6522D390CE0054E60B /* UIColor+Extensions.swift */,
+				CE14AC6422D390CE0054E60B /* UIViewController+Extensions.swift */,
+				CE14AC5E22D38FFC0054E60B /* BasicAudioController.swift */,
+			);
+			path = miscellaneous;
+			sourceTree = "<group>";
+		};
+		CE14AC8522D3981F0054E60B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE14AC8222D398170054E60B /* CustomCell.swift */,
+				CE14AC8122D398170054E60B /* TableViewCells.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FD75FF89EB213FEC8AB02D5F /* Pods */ = {
@@ -182,6 +304,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE14AC6D22D393E70054E60B /* sound2.m4a in Resources */,
+				CE14AC6C22D393E70054E60B /* sound1.m4a in Resources */,
 				569DE6D92267AF41004F6B5B /* LaunchScreen.storyboard in Resources */,
 				569DE6D62267AF41004F6B5B /* Assets.xcassets in Resources */,
 				569DE6D42267AF40004F6B5B /* Main.storyboard in Resources */,
@@ -222,13 +346,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-asn1/Pods-asn1-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SwCrypt/SwCrypt.framework",
+				"${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwCrypt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InputBarAccessoryView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -243,14 +369,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				569DE6D12267AF40004F6B5B /* ViewController.swift in Sources */,
+				CE14AC5F22D38FFC0054E60B /* BasicAudioController.swift in Sources */,
+				CE14AC5D22D38FC20054E60B /* MockSocket.swift in Sources */,
 				5670E5CA226E5924006C868F /* SUtils.swift in Sources */,
+				CE14AC7F22D3975A0054E60B /* MessageContainerController.swift in Sources */,
+				CE14AC8722D398DB0054E60B /* CustomMessageFlowLayout.swift in Sources */,
 				56558E0122D2768800688771 /* SliderVC.swift in Sources */,
+				CE14AC6622D390CE0054E60B /* UIViewController+Extensions.swift in Sources */,
+				CE14AC8322D398170054E60B /* TableViewCells.swift in Sources */,
+				CE14AC6322D390430054E60B /* Lorem.swift in Sources */,
+				CE14AC7E22D3975A0054E60B /* AdvancedExampleViewController.swift in Sources */,
+				CE14AC6722D390CE0054E60B /* UIColor+Extensions.swift in Sources */,
+				CE14AC6922D391250054E60B /* Settings+UserDefaults.swift in Sources */,
 				56558E0322D278D300688771 /* InfoSlider.swift in Sources */,
 				56846180226E63E100E6121E /* ProximityService.swift in Sources */,
+				CE14AC7022D395580054E60B /* AutocompleteExampleViewController.swift in Sources */,
 				569DE6E12267BEA6004F6B5B /* SimpleScanner.swift in Sources */,
 				569DE6E52267BEC5004F6B5B /* KeyChain.swift in Sources */,
+				CE14AC7C22D3975A0054E60B /* BasicExampleViewController.swift in Sources */,
+				CE14AC7D22D3975A0054E60B /* NavigationController.swift in Sources */,
 				569DE6E42267BEC5004F6B5B /* Cipher.swift in Sources */,
+				CE14AC5722D38F490054E60B /* ChatViewController.swift in Sources */,
 				569DE6CF2267AF40004F6B5B /* AppDelegate.swift in Sources */,
+				CE14AC5C22D38FC20054E60B /* MockUser.swift in Sources */,
+				CE14AC6122D390380054E60B /* SampleData.swift in Sources */,
+				CE14AC8022D3975A0054E60B /* SettingsViewController.swift in Sources */,
+				CE14AC7122D395580054E60B /* LaunchViewController.swift in Sources */,
+				CE14AC8422D398170054E60B /* CustomCell.swift in Sources */,
+				CE14AC5B22D38FC20054E60B /* MockMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

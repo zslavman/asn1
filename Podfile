@@ -6,6 +6,6 @@ target 'asn1' do
   use_frameworks!
 
   # Pods for asn1
-  pod 'SwCrypt'
+  pod 'MessageKit', '3.0.0'
 
 end
