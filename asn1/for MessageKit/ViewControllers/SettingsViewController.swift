@@ -29,9 +29,9 @@ final internal class SettingsViewController: UITableViewController {
 
     // MARK: - Properties
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
     
     let cells = ["Mock messages count", "Text Messages", "AttributedText Messages", "Photo Messages", "Video Messages", "Audio Messages", "Emoji Messages", "Location Messages", "Url Messages", "Phone Messages", "ShareContact Messages"]
     

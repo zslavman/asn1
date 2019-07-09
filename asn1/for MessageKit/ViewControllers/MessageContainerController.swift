@@ -27,9 +27,9 @@ import MapKit
 
 final class MessageContainerController: UIViewController {
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
     
     let mapView = MKMapView()
     
