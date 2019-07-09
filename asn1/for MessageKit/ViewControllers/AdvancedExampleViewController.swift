@@ -212,21 +212,19 @@ final class AdvancedExampleViewController: ChatViewController {
                 self.navigationController?.present(actionSheet, animated: true, completion: nil)
         }
     }
-    
+	
+	
     // MARK: - UICollectionViewDataSource
     
     public override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let messagesDataSource = messagesCollectionView.messagesDataSource else {
             fatalError("Ouch. nil data source for messages")
         }
-
         // Very important to check this when overriding `cellForItemAt`
         // Super method will handle returning the typing indicator cell
         guard !isSectionReservedForTypingIndicator(indexPath.section) else {
             return super.collectionView(collectionView, cellForItemAt: indexPath)
         }
-
         let message = messagesDataSource.messageForItem(at: indexPath, in: messagesCollectionView)
         if case .custom = message.kind {
             let cell = messagesCollectionView.dequeueReusableCell(CustomCell.self, for: indexPath)
@@ -236,6 +234,7 @@ final class AdvancedExampleViewController: ChatViewController {
         return super.collectionView(collectionView, cellForItemAt: indexPath)
     }
 
+	
     // MARK: - MessagesDataSource
 
     override func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {

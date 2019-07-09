@@ -171,12 +171,12 @@
 			children = (
 				CE14AC6F22D395580054E60B /* LaunchViewController.swift */,
 				CE14AC6E22D395580054E60B /* AutocompleteExampleViewController.swift */,
+				CE14AC5622D38F490054E60B /* ChatViewController.swift */,
 				CE14AC7922D3975A0054E60B /* AdvancedExampleViewController.swift */,
 				CE14AC7722D3975A0054E60B /* BasicExampleViewController.swift */,
 				CE14AC7A22D3975A0054E60B /* MessageContainerController.swift */,
 				CE14AC7822D3975A0054E60B /* NavigationController.swift */,
 				CE14AC7B22D3975A0054E60B /* SettingsViewController.swift */,
-				CE14AC5622D38F490054E60B /* ChatViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

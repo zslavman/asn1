@@ -60,8 +60,8 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         }
     }
     
-    @objc
-    func loadMoreMessages() {
+	
+    @objc func loadMoreMessages() {
         DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
             SampleData.shared.getMessages(count: 20) { messages in
                 DispatchQueue.main.async {
@@ -74,7 +74,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     }
     
     func configureMessageCollectionView() {
-        
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messageCellDelegate = self
         
@@ -113,11 +112,8 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     }
     
     func isLastSectionVisible() -> Bool {
-        
         guard !messageList.isEmpty else { return false }
-        
         let lastIndexPath = IndexPath(item: 0, section: messageList.count - 1)
-        
         return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
     }
     
@@ -143,7 +139,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     }
     
     func cellBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        
         return NSAttributedString(string: "Read", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
     
@@ -153,7 +148,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     }
     
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        
         let dateString = formatter.string(from: message.sentDate)
         return NSAttributedString(string: dateString, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
     }
@@ -274,7 +268,6 @@ extension ChatViewController: MessageLabelDelegate {
 extension ChatViewController: InputBarAccessoryViewDelegate {
 
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-
         // Here we can parse for which substrings were autocompleted
         let attributedText = messageInputBar.inputTextView.attributedText!
         let range = NSRange(location: 0, length: attributedText.length)
@@ -284,7 +277,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             let context = substring.attribute(.autocompletedContext, at: 0, effectiveRange: nil)
             print("Autocompleted: `", substring, "` with context: ", context ?? [])
         }
-
         let components = inputBar.inputTextView.components
         messageInputBar.inputTextView.text = String()
         messageInputBar.invalidatePlugins()
