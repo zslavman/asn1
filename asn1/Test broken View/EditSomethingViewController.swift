@@ -82,7 +82,7 @@ class EditSomethingViewController: UIViewController {
 	
 	
 	@objc private func onBackingClick() {
-		//view.endEditing(true)
+		view.endEditing(true)
 	}
 	
 }
@@ -154,7 +154,7 @@ class ChangeNameAndAvatarView: UIView, UITextFieldDelegate {
 		let view = UIView()
 		view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
 		view.translatesAutoresizingMaskIntoConstraints = false
-		//view.isUserInteractionEnabled = false
+		view.isUserInteractionEnabled = false
 		return view
 	}()
 	let iconSize: CGFloat = 24
@@ -185,7 +185,7 @@ class ChangeNameAndAvatarView: UIView, UITextFieldDelegate {
 	
 	override func didMoveToSuperview() {
 		super.didMoveToSuperview()
-		//nameTextField.becomeFirstResponder()
+		nameTextField.becomeFirstResponder()
 	}
 	
 	public func updateView(name: String, avatarURL: String) {
