@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuickLook
 
 class ViewController: UIViewController {
 
@@ -48,8 +49,13 @@ class ViewController: UIViewController {
 	@IBAction func onBttn1Click(_ sender: UIButton) {
 		//let sliderVC = SliderVC()
 		//let lounchVC = LaunchViewController()
-		let lounchVC = EditSomethingViewController()
-		navigationController?.pushViewController(lounchVC, animated: true)
+
+		let previewController = CustomQLPreviewController()
+		previewController.dataSource = self
+		//navigationController?.pushViewController(previewController, animated: false)
+		present(previewController, animated: true)
+		//show(previewController, sender: nil)
+		didMove(toParent: self)
 	}
 	
 	
@@ -93,7 +99,30 @@ class ViewController: UIViewController {
 	
 	// -------------------------------------
 	
-
-
 }
 
+
+extension ViewController: QLPreviewControllerDataSource {
+	func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+		return 1
+	}
+	
+	func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+		guard let url = Bundle.main.url(forResource: String(index), withExtension: "png") else {
+			fatalError("Could not load \(index)")
+		}
+		return url as QLPreviewItem
+	}
+	
+}
+
+
+class CustomQLPreviewController: QLPreviewController {
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		navigationItem.rightBarButtonItems = nil
+	}
+	
+	
+}

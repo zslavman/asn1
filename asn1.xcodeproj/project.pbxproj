@@ -42,8 +42,9 @@
 		CE14AC8322D398170054E60B /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC8122D398170054E60B /* TableViewCells.swift */; };
 		CE14AC8422D398170054E60B /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC8222D398170054E60B /* CustomCell.swift */; };
 		CE14AC8722D398DB0054E60B /* CustomMessageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14AC8622D398DB0054E60B /* CustomMessageFlowLayout.swift */; };
-		CEA8520322F1B2ED008A5A35 /* EditSomethingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA8520222F1B2ED008A5A35 /* EditSomethingViewController.swift */; };
-		CEA8520722F1B519008A5A35 /* ChangeNameAndAvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA8520622F1B519008A5A35 /* ChangeNameAndAvatarView.xib */; };
+		CE20594D2301AA4B007E86F4 /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20594C2301AA4B007E86F4 /* 0.png */; };
+		CE2059502301AAA1007E86F4 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20594E2301AAA1007E86F4 /* 2.png */; };
+		CE2059512301AAA1007E86F4 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20594F2301AAA1007E86F4 /* 1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,8 +87,9 @@
 		CE14AC8122D398170054E60B /* TableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
 		CE14AC8222D398170054E60B /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		CE14AC8622D398DB0054E60B /* CustomMessageFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessageFlowLayout.swift; sourceTree = "<group>"; };
-		CEA8520222F1B2ED008A5A35 /* EditSomethingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSomethingViewController.swift; sourceTree = "<group>"; };
-		CEA8520622F1B519008A5A35 /* ChangeNameAndAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeNameAndAvatarView.xib; sourceTree = "<group>"; };
+		CE20594C2301AA4B007E86F4 /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
+		CE20594E2301AAA1007E86F4 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		CE20594F2301AAA1007E86F4 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,13 +133,15 @@
 		569DE6CD2267AF40004F6B5B /* asn1 */ = {
 			isa = PBXGroup;
 			children = (
-				CEA8520122F1B2C4008A5A35 /* Test broken View */,
 				569DE6CE2267AF40004F6B5B /* AppDelegate.swift */,
 				569DE6D02267AF40004F6B5B /* ViewController.swift */,
 				569DE6E62267BECF004F6B5B /* Other */,
 				CE14AC5522D38C810054E60B /* for MessageKit */,
 				569DE6D22267AF40004F6B5B /* Main.storyboard */,
 				569DE6D52267AF41004F6B5B /* Assets.xcassets */,
+				CE20594C2301AA4B007E86F4 /* 0.png */,
+				CE20594F2301AAA1007E86F4 /* 1.png */,
+				CE20594E2301AAA1007E86F4 /* 2.png */,
 				569DE6D72267AF41004F6B5B /* LaunchScreen.storyboard */,
 				569DE6DA2267AF41004F6B5B /* Info.plist */,
 			);
@@ -235,15 +239,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		CEA8520122F1B2C4008A5A35 /* Test broken View */ = {
-			isa = PBXGroup;
-			children = (
-				CEA8520622F1B519008A5A35 /* ChangeNameAndAvatarView.xib */,
-				CEA8520222F1B2ED008A5A35 /* EditSomethingViewController.swift */,
-			);
-			path = "Test broken View";
-			sourceTree = "<group>";
-		};
 		FD75FF89EB213FEC8AB02D5F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,10 +315,12 @@
 			files = (
 				CE14AC6D22D393E70054E60B /* sound2.m4a in Resources */,
 				CE14AC6C22D393E70054E60B /* sound1.m4a in Resources */,
+				CE2059502301AAA1007E86F4 /* 2.png in Resources */,
+				CE2059512301AAA1007E86F4 /* 1.png in Resources */,
 				569DE6D92267AF41004F6B5B /* LaunchScreen.storyboard in Resources */,
+				CE20594D2301AA4B007E86F4 /* 0.png in Resources */,
 				569DE6D62267AF41004F6B5B /* Assets.xcassets in Resources */,
 				569DE6D42267AF40004F6B5B /* Main.storyboard in Resources */,
-				CEA8520722F1B519008A5A35 /* ChangeNameAndAvatarView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,7 +401,6 @@
 				CE14AC7C22D3975A0054E60B /* BasicExampleViewController.swift in Sources */,
 				CE14AC7D22D3975A0054E60B /* NavigationController.swift in Sources */,
 				569DE6E42267BEC5004F6B5B /* Cipher.swift in Sources */,
-				CEA8520322F1B2ED008A5A35 /* EditSomethingViewController.swift in Sources */,
 				CE14AC5722D38F490054E60B /* ChatViewController.swift in Sources */,
 				569DE6CF2267AF40004F6B5B /* AppDelegate.swift in Sources */,
 				CE14AC5C22D38FC20054E60B /* MockUser.swift in Sources */,
