@@ -8,9 +8,12 @@
 
 import UIKit
 import QuickLook
+import CircleProgressView
+
 
 class ViewController: UIViewController {
-
+	
+	@IBOutlet weak var imaga: UIImageView!
 	@IBOutlet weak var textView: UITextView!
 	@IBOutlet weak var textLabel: UITextView!
 	@IBOutlet weak var bttn1: UIButton!
@@ -27,6 +30,55 @@ class ViewController: UIViewController {
 		configure()
 		//textView.text = temp
 		ProximityService.shared.textView = textView
+		
+//		imaga.image = #imageLiteral(resourceName: "Steven-Deutsch")
+//		imaga.contentMode = .scaleAspectFill
+//		imaga.layer.masksToBounds = true
+		
+		//installProgressBar()
+	}
+	
+	
+	var progressView: CircleProgressView = {
+		let progressView = CircleProgressView(frame: .zero)
+		progressView.translatesAutoresizingMaskIntoConstraints = false
+		progressView.trackWidth = 2
+		progressView.trackBorderWidth = 2
+		progressView.trackFillColor = .white
+		progressView.roundedCap = true
+		progressView.trackBackgroundColor = .clear
+		progressView.centerFillColor = .clear
+		progressView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+		progressView.layer.cornerRadius = 18
+		progressView.layer.masksToBounds = true
+		//progressView.centerImage = ViewController.resizeImage(#imageLiteral(resourceName: "close_upload"), firstOutSide: 12, isMin: true)
+		return progressView
+	}()
+	
+	private func installProgressBar() {
+		view.addSubview(progressView)
+		
+		NSLayoutConstraint.activate([
+			progressView.widthAnchor.constraint(equalToConstant: 36),
+			progressView.heightAnchor.constraint(equalToConstant: 36),
+			progressView.centerXAnchor.constraint(equalTo: textView.centerXAnchor),
+			progressView.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
+		])
+		progressView.progress = 0.33
+		
+		let chrost = UIImageView(image: #imageLiteral(resourceName: "close_upload"))
+		chrost.translatesAutoresizingMaskIntoConstraints = false
+		chrost.contentMode = .scaleAspectFit
+		//view.addSubview(chrost)
+		progressView.addSubview(chrost)
+		
+		NSLayoutConstraint.activate([
+			chrost.widthAnchor.constraint(equalToConstant: 24),
+			chrost.heightAnchor.constraint(equalToConstant: 24),
+			chrost.centerXAnchor.constraint(equalTo: progressView.centerXAnchor),
+			chrost.centerYAnchor.constraint(equalTo: progressView.centerYAnchor),
+		])
+		
 	}
 	
 	
@@ -46,16 +98,19 @@ class ViewController: UIViewController {
 	}
 	
 	
+	let orientations = ["f1t", "f2t", "f3t", "f4t", "f5t", "f6t","f7t", "f8t"]
+	var count: Int = 0
+	
 	@IBAction func onBttn1Click(_ sender: UIButton) {
-		//let sliderVC = SliderVC()
-		//let lounchVC = LaunchViewController()
-
-		let previewController = CustomQLPreviewController()
-		previewController.dataSource = self
-		//navigationController?.pushViewController(previewController, animated: false)
-		present(previewController, animated: true)
-		//show(previewController, sender: nil)
-		didMove(toParent: self)
+//		imaga.contentMode = .scaleAspectFit
+//		let imName = orientations[count] + ".jpg"
+//		imaga.image = UIImage(named: imName)
+//		count += 1
+//		if count > orientations.count - 1 {
+//			count = 0
+//		}
+		let vc = LaunchViewController()
+		navigationController?.pushViewController(vc, animated: true)
 	}
 	
 	
@@ -99,6 +154,43 @@ class ViewController: UIViewController {
 	
 	// -------------------------------------
 	
+	
+	
+	
+	/// Resize image proportionally
+	///
+	/// - Parameters:
+	///   - image: source
+	///   - firstOutSide: required size of the output side
+	///   - isMin: if true - firstOutSide will be min, else - max
+	public static func resizeImage(_ image: UIImage, firstOutSide: CGFloat, isMin: Bool) -> UIImage {
+		let size = image.size
+		let isLandscape = size.width > size.height
+		let origMinSide = min(size.width, size.height)
+		let origMaxSide = max(size.width, size.height)
+		let ratio = origMaxSide / origMinSide // > 0
+		var secondOutSide = ratio * firstOutSide
+		if !isMin {
+			secondOutSide = firstOutSide / ratio
+		}
+		
+		var newSize: CGSize
+		if (isLandscape && isMin) || (!isLandscape && !isMin) {
+			newSize = CGSize(width: secondOutSide, height: firstOutSide)
+		}
+		else {
+			newSize = CGSize(width: firstOutSide,  height: secondOutSide)
+		}
+		
+		let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+		UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+		image.draw(in: rect)
+		let newImage = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		
+		return newImage!
+	}
+	
 }
 
 
@@ -113,16 +205,5 @@ extension ViewController: QLPreviewControllerDataSource {
 		}
 		return url as QLPreviewItem
 	}
-	
-}
-
-
-class CustomQLPreviewController: QLPreviewController {
-	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		navigationItem.rightBarButtonItems = nil
-	}
-	
 	
 }

@@ -1,20 +1,24 @@
 PODS:
+  - CircleProgressView (1.2.0)
   - InputBarAccessoryView (4.2.2)
   - MessageKit (3.0.0):
     - InputBarAccessoryView (~> 4.2.2)
 
 DEPENDENCIES:
+  - CircleProgressView (= 1.2.0)
   - MessageKit (= 3.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - CircleProgressView
     - InputBarAccessoryView
     - MessageKit
 
 SPEC CHECKSUMS:
+  CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
 
-PODFILE CHECKSUM: 18e3225d414d610d08cf8aeb69e7724c6e87552f
+PODFILE CHECKSUM: 022f84d0f3997d25de40ee9f31bcbc94d5ab9b07
 
 COCOAPODS: 1.5.3

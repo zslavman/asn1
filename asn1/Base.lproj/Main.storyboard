@@ -74,13 +74,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pON-7R-sz9">
+                                <rect key="frame" x="20" y="83.5" width="335" height="483.5"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.92549019610000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="pON-7R-sz9" firstAttribute="bottom" secondItem="2E7-cJ-Gv8" secondAttribute="bottom" id="0Qu-W7-r9l"/>
+                            <constraint firstItem="pON-7R-sz9" firstAttribute="top" secondItem="TwZ-ZB-VR7" secondAttribute="top" id="2Jg-Qx-Sdm"/>
                             <constraint firstItem="2E7-cJ-Gv8" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.5" id="9P0-dQ-N5d"/>
                             <constraint firstItem="2E7-cJ-Gv8" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="ARR-gd-2V9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TwZ-ZB-VR7" secondAttribute="trailing" constant="20" id="Eae-78-EOq"/>
+                            <constraint firstItem="pON-7R-sz9" firstAttribute="leading" secondItem="2E7-cJ-Gv8" secondAttribute="leading" id="KbB-rC-0BS"/>
                             <constraint firstItem="TwZ-ZB-VR7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LO7-qK-efj"/>
+                            <constraint firstItem="pON-7R-sz9" firstAttribute="trailing" secondItem="2E7-cJ-Gv8" secondAttribute="trailing" id="MX0-5f-7N1"/>
                             <constraint firstItem="TwZ-ZB-VR7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="OiN-Mz-Avi"/>
                             <constraint firstItem="2E7-cJ-Gv8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="P5O-gF-YWI"/>
                             <constraint firstItem="TwZ-ZB-VR7" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="dI9-Ay-Dg2"/>
@@ -88,6 +95,7 @@
                             <constraint firstItem="1tx-o5-24y" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.85" id="gVi-A6-NfO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2E7-cJ-Gv8" secondAttribute="trailing" constant="20" id="ite-5L-2oQ"/>
                             <constraint firstItem="TwZ-ZB-VR7" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.75" id="kql-mL-ZlS"/>
+                            <constraint firstItem="pON-7R-sz9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qhB-Yn-mNI"/>
                             <constraint firstItem="1tx-o5-24y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="qtN-N2-mZC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1tx-o5-24y" secondAttribute="trailing" constant="20" id="sZi-sR-YeZ"/>
                         </constraints>
@@ -111,13 +119,14 @@
                         <outlet property="bttn3" destination="h5o-EK-HBh" id="ifF-th-ltw"/>
                         <outlet property="bttnNavLeft" destination="aNN-gm-RWi" id="eaP-pn-2qF"/>
                         <outlet property="bttnNavRight" destination="Tqw-1k-g30" id="UXU-mp-kRy"/>
+                        <outlet property="imaga" destination="pON-7R-sz9" id="ox8-k7-IZx"/>
                         <outlet property="textLabel" destination="2E7-cJ-Gv8" id="sVU-xv-Udf"/>
                         <outlet property="textView" destination="TwZ-ZB-VR7" id="xNI-zE-zUK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102" y="134"/>
+            <point key="canvasLocation" x="1101.5999999999999" y="133.5832083958021"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iAg-bZ-iYY">

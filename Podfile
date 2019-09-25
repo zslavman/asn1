@@ -7,5 +7,6 @@ target 'asn1' do
 
   # Pods for asn1
   pod 'MessageKit', '3.0.0'
+  pod 'CircleProgressView', '1.2.0'
 
 end
