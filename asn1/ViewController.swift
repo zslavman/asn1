@@ -23,20 +23,45 @@ class ViewController: UIViewController {
 	@IBOutlet weak var bttnNavRight: UIBarButtonItem!
 	private lazy var allBttns = [bttnNavLeft, bttnNavRight, bttn1, bttn2, bttn3]
 	private let allNames = ["func1", "Очист.", "Кн.1", "Кн.2", "Сенсор"]
-	let temp = "ijhsdjahfgkjhskjfhjkshjkhsdkjfhkjsdhfjlhsljhflsjkhjljskhfjdshfjshfjkshfjkhsf jhs jfhsjfh jsh fjhflkwe fngerkljgjn ianhti erpkrol ijhsdjahfgk jhskjfhjkshjkhsdkjfhkj sdhfjlhsljhflsjkhjljskhfjdshfjshfjkshfjkhsf jhs jfhsjfh jsh fjhjg kjoghj,cbk ixfjkjdfnrj gfr" // 256 bytes
+	let temp = "so @Emmanuel is there any way for it to use the attributes on the attributedText?"
+	let temp2 = "so @Emmanuel"
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		configure()
-		//textView.text = temp
 		ProximityService.shared.textView = textView
-		
+		doRoundedRectOnText()
 //		imaga.image = #imageLiteral(resourceName: "Steven-Deutsch")
 //		imaga.contentMode = .scaleAspectFill
 //		imaga.layer.masksToBounds = true
 		
 		//installProgressBar()
 	}
+	
+	private func doRoundedRectOnText() {
+		let roundedTextView = HighlightLabel()
+		roundedTextView.translatesAutoresizingMaskIntoConstraints = false
+		roundedTextView.layer.borderWidth = 1
+		roundedTextView.layer.borderColor = UIColor.black.cgColor
+		
+		
+		let atr = NSAttributedString(string: temp2, attributes: [
+			NSAttributedString.Key.foregroundColor	: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1),
+			NSAttributedString.Key.font				: UIFont.systemFont(ofSize: 30, weight: .regular),
+			NSAttributedString.Key(rawValue: "MyRoundedBackgroundColor"): #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
+		])
+		
+		roundedTextView.configWith(color: #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1), atribute: atr)
+		//roundedTextView.attributedText = atr
+		view.addSubview(roundedTextView)
+		NSLayoutConstraint.activate([
+			roundedTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			roundedTextView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+			roundedTextView.widthAnchor.constraint(equalToConstant: 300),
+			roundedTextView.heightAnchor.constraint(equalToConstant: 250),
+		])
+	}
+	
 	
 	
 	var progressView: CircleProgressView = {
@@ -109,6 +134,8 @@ class ViewController: UIViewController {
 //		if count > orientations.count - 1 {
 //			count = 0
 //		}
+		
+		/// for MessageKit
 		let vc = LaunchViewController()
 		navigationController?.pushViewController(vc, animated: true)
 	}
